@@ -6,11 +6,11 @@ downscale_height: 400      # if the input image is larger than this, scale it do
 
 # Comment any of these lines to prevent detection / pose estimation of that object
 weights: {
-    # "cracker":"package://dope/weights/cracker_60.pth",
+    "cracker":"package://dope/weights/cracker_60.pth",
     # "gelatin":"package://dope/weights/gelatin_60.pth",
     # "meat":"package://dope/weights/meat_20.pth",
     # "mustard":"package://dope/weights/mustard_60.pth",
-    "soup":"package://dope/weights/soup_60.pth",
+    # "soup":"package://dope/weights/soup_60.pth",
     #"sugar":"package://dope/weights/sugar_60.pth",
     # "bleach":"package://dope/weights/bleach_28_dr.pth"
     
@@ -21,7 +21,7 @@ weights: {
     # "Cherries":"package://dope/weights/Cherries.pth", 
     # "ChocolatePudding":"package://dope/weights/ChocolatePudding.pth", 
     # "Cookies":"package://dope/weights/Cookies.pth", 
-    # "Corn":"package://dope/weights/Corn.pth", 
+    "Corn":"package://dope/weights/Corn.pth", 
     # "CreamCheese":"package://dope/weights/CreamCheese.pth", 
     # "GreenBeans":"package://dope/weights/GreenBeans.pth", 
     # "GranolaBars":"package://dope/weights/GranolaBars.pth", 
@@ -133,6 +133,7 @@ draw_colors: {
     "soup": [255, 101, 0],  # orange
     "sugar": [232, 222, 12],  # yellow
     "bleach": [232, 222, 12],  # yellow
+    "Corn" : [0, 104, 255],
 }
 
 # optional: provide a transform that is applied to the pose returned by DOPE
@@ -165,6 +166,7 @@ mesh_scales: {
     "soup":    0.01,
     "sugar":   0.01,
     "bleach":  0.01,
+    "Corn": 0.01,
 }
 
 overlay_belief_images: True   # Whether to overlay the input image on the belief images published on /dope/belief_[obj_name]

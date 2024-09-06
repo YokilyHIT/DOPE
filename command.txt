@@ -1,0 +1,1 @@
+python inference.py --weights ../weights --data ../sample_data --object cracker

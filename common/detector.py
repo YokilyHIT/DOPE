@@ -264,9 +264,17 @@ class ModelData(object):
         if self.parallel:
             net = torch.nn.DistributedDataParallel(net, [self.gpu_id]).cuda()
         else:
-            net = net.cuda()
-
-        net.load_state_dict(torch.load(path))
+            net = net.cpu()
+        
+        state_dict = torch.load(path,map_location=torch.device('cpu'))
+        new_state_dict = {}
+        for k, v in state_dict.items():
+            if k.startswith('module.'):
+                new_state_dict[k[7:]] = v
+            else:
+                new_state_dict[k] = v
+        net.load_state_dict(new_state_dict, strict=False);
+        """net.load_state_dict(torch.load(path,map_location=torch.device('cpu')))"""
         net.eval()
         print(
             "    Model loaded in {:.2f} seconds.".format(
@@ -471,7 +479,7 @@ class ObjectDetector(object):
 
         # Run network inference
         image_tensor = transform(in_img)
-        image_torch = Variable(image_tensor).cuda().unsqueeze(0)
+        image_torch = Variable(image_tensor).unsqueeze(0)
         out, seg = net_model(
             image_torch
         )  # run inference using the network (calls 'forward' method)
